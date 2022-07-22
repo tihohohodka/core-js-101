@@ -202,8 +202,36 @@ function extractEmails(str) {
  *             '└──────────┘\n'
  *
  */
-function getRectangleString(/* width, height */) {
-  throw new Error('Not implemented');
+function getRectangleString(weight, height) {
+  let result = '';
+  for (let i = 0; i <= height - 1; i += 1) {
+    for (let j = 0; j <= weight - 1; j += 1) {
+      if (i === 0 && j === 0) {
+        result += '┌';
+      } else
+      if (i === 0 && j === weight - 1) {
+        result += '┐\n';
+      } else
+      if (i === height - 1 && j === 0) {
+        result += '└';
+      } else
+      if (i === height - 1 && j === weight - 1) {
+        result += '┘\n';
+      } else
+      if (j === 0) {
+        result += '│';
+      } else
+      if (j === weight - 1) {
+        result += '│\n';
+      } else
+      if (i === height - 1 || i === 0) {
+        result += '─';
+      } else {
+        result += ' ';
+      }
+    }
+  }
+  return result;
 }
 
 
@@ -223,8 +251,18 @@ function getRectangleString(/* width, height */) {
  *    => 'NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm'
  *
  */
-function encodeToRot13(/* str */) {
-  throw new Error('Not implemented');
+function encodeToRot13(str) {
+  const aChar = 'a'.charCodeAt(0);
+  const AChar = 'A'.charCodeAt(0);
+  const alphLength = 26;
+  let result = '';
+  result = str.split('').map((letter) => {
+    if (!letter.match(/[A-Za-z]/)) return letter;
+    const c = Math.floor(letter.charCodeAt(0) / aChar);
+    const k = (letter.toLowerCase().charCodeAt(0) - 83) % alphLength || alphLength;
+    return String.fromCharCode(k + ((c === 0) ? AChar - 1 : aChar - 1));
+  }).join('');
+  return result;
 }
 
 /**
@@ -240,8 +278,8 @@ function encodeToRot13(/* str */) {
  *   isString('test') => true
  *   isString(new String('test')) => true
  */
-function isString(/* value */) {
-  throw new Error('Not implemented');
+function isString(value) {
+  return (typeof value === 'string' || value instanceof String);
 }
 
 
@@ -269,8 +307,18 @@ function isString(/* value */) {
  *   'Q♠' => 50
  *   'K♠' => 51
  */
-function getCardId(/* value */) {
-  throw new Error('Not implemented');
+function getCardId(value) {
+  let card = value.charAt(value.length - 1);
+  let cardNum = value.slice(0, -1);
+  if (cardNum === 'A') cardNum = 1;
+  if (cardNum === 'J') cardNum = 11;
+  if (cardNum === 'Q') cardNum = 12;
+  if (cardNum === 'K') cardNum = 13;
+  if (card === '♣') card = 0;
+  if (card === '♦') card = 13;
+  if (card === '♥') card = 26;
+  if (card === '♠') card = 39;
+  return +card + +cardNum - 1;
 }
 
 
