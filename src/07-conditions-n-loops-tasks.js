@@ -92,8 +92,8 @@ function getSumBetweenNumbers(min, max) {
  *   10,1,1   =>  false
  *   10,10,10 =>  true
  */
-function isTriangle(/* a, b, c */) {
-  throw new Error('Not implemented');
+function isTriangle(a, b, c) {
+  return (((a + b) > c) && ((a + c) > b) && ((b + c) > a));
 }
 
 
