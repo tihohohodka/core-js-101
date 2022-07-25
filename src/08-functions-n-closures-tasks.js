@@ -111,7 +111,7 @@ function memoize(func) {
  * retryer() => 2
  */
 function retry(func, attempts) {
-  return function () {
+  return function greg() {
     let res;
     try {
       func();
