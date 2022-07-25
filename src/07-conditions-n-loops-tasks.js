@@ -27,8 +27,7 @@
  *  21 => 'Fizz'
  *
  */
-function getFizzBuzz(num) {
-  let result = ''
+function getFizzBuzz(/* num */) {
   throw new Error('Not implemented');
 }
 

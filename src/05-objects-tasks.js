@@ -120,10 +120,11 @@ function fromJSON(proto, json) {
  */
 
 const cssSelectorBuilder = {
+
   result: '',
 
   element(value) {
-    return
+    return value;
   },
 
   id(value) {
